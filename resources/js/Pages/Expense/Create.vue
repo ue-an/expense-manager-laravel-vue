@@ -1,0 +1,153 @@
+<script setup>
+import AuthLayout from '@/Layouts/AuthLayout.vue';
+import { Link, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import { CalendarIcon } from '@heroicons/vue/24/solid';
+import VueDatePicker from '../../../../node_modules/@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+
+const props = defineProps({
+  categories: Object,
+  user: Object,
+});
+
+const modal = ref(0);
+
+const form = useForm({
+  amount: '',
+  category_id: '',
+  entry_date: '',
+  user_id: props.user['id'],
+});
+
+const date = ref(form.entry_date);
+
+const format = (date) => {
+  // YYYY-MM-DD HH:MM:SS
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  // const hours = date.getUTCHours();
+  // const minutes = date.getUTCMinutes();
+  // const seconds = date.getUTCSeconds();
+
+  return `${year}-${month}-${day}`;
+}
+
+function showModal() {
+  let modal = document.getElementById('modal');
+  modal.style.display = 'block';
+}
+
+function hideModal() {
+  let modal = document.getElementById('modal');
+  modal.style.display = 'none';
+}
+
+const submitAdd = () => {
+  form.post(route('expense.store'));
+}
+</script>
+
+<template lang="">
+ <auth-layout>
+  <div class=" py-6 space-y-12 px-12">
+    <div class=" justify-between flex">
+      <div>
+        Expenses
+      </div>
+      <div>
+        Expense Management > Users
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class=" fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+   <div class=" relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div class="text-center">
+     <div fill="none" class=" mx-auto flex-col flex items-center justify-center">
+      <div class=" w-full flex">
+       <div class=" text-lg leading-6 font-medium text-gray-900">Add Expense</div>
+      </div>
+      
+      <div class=" w-full mt-2 py-3">
+       <form name="createForm" @submit.prevent="submitAdd" class=" space-y-3">
+        <div class=" flex-col flex">
+          <div class=" items-center justify-between flex">
+           <div class=" items-center flex">
+            <div>Expense Category</div>
+            <input hidden class=" w-[calc(100%/3)]" id="category_id" name="category_id" v-model="form.category_id" type="text">
+           </div>
+          
+            <div>
+              <select v-model="form.category_id" @change="form.category_id" class=" border-black border-2">
+              <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+              </select>
+            </div>
+          </div>
+          <div class=" items-center justify-end flex text-red-600" v-if="form.errors.category_id">
+            {{ form.errors.category_id }}
+          </div>
+        </div>
+
+        <div class=" flex-col flex">
+          <div class=" items-center justify-between flex">
+            <label for="amount">Amount</label>
+            <input 
+             id="amount"
+             v-model="form.amount"
+             type="number"
+             name="amount"
+             placeholder="Amount"
+            />
+          </div>
+          <div class=" items-center justify-end flex text-red-600" v-if="form.errors.amount">
+           {{ form.errors.amount }}
+          </div>
+        </div>
+
+        <div class=" flex-col flex">
+          <div class=" items-center justify-between flex">
+            <label for="email">Entry Date</label>
+            <div class=" justify-end flex">
+            </div>
+            <!-- <calendar-icon class=" w-6"/> -->
+            <div class="w-[calc(100%-42%)]">
+             <VueDatePicker v-model="form.entry_date" :format="format"></VueDatePicker>
+            </div>
+            </div>
+          <div class=" items-center justify-end flex text-red-600" v-if="form.errors.entry_date">
+            {{ form.errors.entry_date }}
+          </div>
+        </div>
+
+        <div class=" gap-3 justify-end flex py-3">
+         <div class=" gap-3 flex">
+           <input
+            hidden
+            type="text"
+            id="user_id"
+            name="user_id"
+            v-model="form.user_id"
+           />
+           <Link :href="route('expense.index')">
+            <button id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+             Cancel
+            </button>
+           </Link>
+           <button type="submit" id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+              Save
+           </button>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </auth-layout> 
+</template>
