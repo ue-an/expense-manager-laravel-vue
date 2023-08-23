@@ -1,35 +1,17 @@
 <script setup>
-defineProps({
- categories: Object,
-});
-
 import AuthLayout from '@/Layouts/AuthLayout.vue';
 import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3';
 
-let isOpen = ref(false);
+defineProps({
+  categories: Object,
+});
 
-const handleOpen = () => {
- isOpen.value = !isOpen.value;
- console.log(isOpen.value);
-};
-const modal = ref(0)
-
-function showModal() {
- let modal = document.getElementById('modal');
- modal.style.display = 'block';
-}
-
-function hideModal() {
- let modal = document.getElementById('modal');
- modal.style.display = 'none';
-}
-
-function convertDate(timeStamp){
+function convertDate(timeStamp) {
   var dateFormat = new Date(timeStamp);
-  var formatted = dateFormat.getFullYear()+
-           "-"+(dateFormat.getMonth()+1)+
-           "-"+dateFormat.getDate();
+  var formatted = dateFormat.getFullYear() +
+    "-" + (dateFormat.getMonth() + 1) +
+    "-" + dateFormat.getDate();
   return formatted;
 }
 </script>
@@ -46,6 +28,7 @@ function convertDate(timeStamp){
         </div>
       </div>
 
+      <!-- MAIN CONTENT - Categories Table -->
       <div class=" px-12">
         <table className=" table-fixed w-full">
           <thead>
@@ -55,6 +38,7 @@ function convertDate(timeStamp){
                   <th className="px-4 py-2">Created at</th>
               </tr>
           </thead>
+
           <tbody>
               <tr v-for="category in categories" :key="category.id">
                   <td className="border px-4 py-2">
@@ -64,6 +48,7 @@ function convertDate(timeStamp){
                       </div>
                     </Link>
                   </td>
+
                   <td className="border px-4 py-2">
                     <Link :href="route('category.edit', category)">
                       <div>
@@ -71,6 +56,7 @@ function convertDate(timeStamp){
                       </div>
                     </Link>
                   </td>
+                  
                   <td className="border px-4 py-2">
                     <Link :href="route('category.edit', category)">
                       <div>
@@ -81,6 +67,8 @@ function convertDate(timeStamp){
               </tr>
           </tbody>
         </table>
+
+        <!-- create button -->
         <div class=" mt-3 justify-end flex">
           <Link :href="route('category.create')">
             <button class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4">

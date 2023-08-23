@@ -1,5 +1,6 @@
 <script setup>
 import AuthLayout from '@/Layouts/AuthLayout.vue';
+import { Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
   roles: Object,
@@ -26,6 +27,7 @@ function convertDate(timeStamp) {
         </div>
       </div>
 
+      <!-- MAIN CONTENT - Roles Table -->
       <div class=" px-12">
         <table className=" table-fixed w-full">
         <thead>
@@ -35,6 +37,7 @@ function convertDate(timeStamp) {
                 <th className="px-4 py-2">Created at</th>
               </tr>
           </thead>
+
           <tbody>
               <tr v-for="role in roles" :key="role.id">
                   <td className="border px-4 py-2">
@@ -44,6 +47,7 @@ function convertDate(timeStamp) {
                       </div>
                     </Link>
                   </td>
+
                   <td className="border px-4 py-2">
                     <Link :href="route('role.edit', role)">
                       <div>
@@ -51,6 +55,7 @@ function convertDate(timeStamp) {
                       </div>
                     </Link>
                   </td>
+
                   <td className="border px-4 py-2">
                     <Link :href="route('role.edit', role)">
                       <div>
@@ -61,10 +66,11 @@ function convertDate(timeStamp) {
               </tr>
           </tbody>
         </table>
+        
         <div class=" mt-3 justify-end flex">
-          <Link :href="route('user.create')">
+          <Link :href="route('role.create')">
             <button class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4">
-              Add User
+              Add Role
             </button>
           </Link>
         </div>

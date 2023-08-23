@@ -11,8 +11,6 @@ const props = defineProps({
   user: Object,
 });
 
-const modal = ref(0);
-
 const form = useForm({
   amount: '',
   category_id: '',
@@ -20,6 +18,7 @@ const form = useForm({
   user_id: props.user['id'],
 });
 
+// Convert datetime format
 const date = ref(form.entry_date);
 
 const format = (date) => {
@@ -32,16 +31,6 @@ const format = (date) => {
   // const seconds = date.getUTCSeconds();
 
   return `${year}-${month}-${day}`;
-}
-
-function showModal() {
-  let modal = document.getElementById('modal');
-  modal.style.display = 'block';
-}
-
-function hideModal() {
-  let modal = document.getElementById('modal');
-  modal.style.display = 'none';
 }
 
 const submitAdd = () => {
@@ -70,9 +59,13 @@ const submitAdd = () => {
       <div class=" w-full flex">
        <div class=" text-lg leading-6 font-medium text-gray-900">Add Expense</div>
       </div>
+
+      <div class=" h-[1px] bg-black w-full"></div>
       
+      <!-- FORM -->
       <div class=" w-full mt-2 py-3">
        <form name="createForm" @submit.prevent="submitAdd" class=" space-y-3">
+        <!-- category - dropdown -->
         <div class=" flex-col flex">
           <div class=" items-center justify-between flex">
            <div class=" items-center flex">
@@ -93,6 +86,7 @@ const submitAdd = () => {
           </div>
         </div>
 
+        <!-- amount -->
         <div class=" flex-col flex">
           <div class=" items-center justify-between flex">
             <label for="amount">Amount</label>
@@ -109,39 +103,45 @@ const submitAdd = () => {
           </div>
         </div>
 
+        <!-- entry date -->
         <div class=" flex-col flex">
           <div class=" items-center justify-between flex">
-            <label for="email">Entry Date</label>
-            <div class=" justify-end flex">
-            </div>
-            <!-- <calendar-icon class=" w-6"/> -->
-            <div class="w-[calc(100%-42%)]">
-             <VueDatePicker v-model="form.entry_date" :format="format"></VueDatePicker>
-            </div>
+              <label for="email">Entry Date</label>
+              <div class=" justify-end flex">
+              </div>
+              <!-- <calendar-icon class=" w-6"/> -->
+              <div class="w-[calc(100%-42%)]">
+              <VueDatePicker v-model="form.entry_date" :format="format"></VueDatePicker>
+              </div>
             </div>
           <div class=" items-center justify-end flex text-red-600" v-if="form.errors.entry_date">
             {{ form.errors.entry_date }}
           </div>
         </div>
 
+        <!-- buttons -->
         <div class=" gap-3 justify-end flex py-3">
-         <div class=" gap-3 flex">
-           <input
-            hidden
-            type="text"
-            id="user_id"
-            name="user_id"
-            v-model="form.user_id"
-           />
-           <Link :href="route('expense.index')">
-            <button id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
-             Cancel
-            </button>
-           </Link>
-           <button type="submit" id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+          <!-- hidden input for getting current user id -->
+          <div class=" gap-3 flex">
+            <input
+              hidden
+              type="text"
+              id="user_id"
+              name="user_id"
+              v-model="form.user_id"
+            />
+            <!--  -->
+
+            <Link :href="route('expense.index')">
+              <button id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+                Cancel
+              </button>
+            </Link>
+            
+            <button type="submit" id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
               Save
-           </button>
-         </div>
+            </button>
+          </div>
         </div>
        </form>
       </div>

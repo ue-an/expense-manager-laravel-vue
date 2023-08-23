@@ -8,37 +8,26 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 const props = defineProps({
     categories: Object,
     sums: Object,
-
 });
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
+// Extracting category names for chart label
 const categoryNames = [];
-
 for (let i = 0; i < props.categories.length; i++) {
     console.log(props.categories[i].name);
     categoryNames.push(props.categories[i].name);
 }
 
-function getCategoryNames(categories) {
-    for (let i = 0; i < props.categories.length; i++) {
-        return props.categories[i].name;
-    }
-
-}
-
-// for (var category in props.categories) {
-//     console.log(category);
-// }
-
+// Pie Chart data and configuration
 const chartData = {
-    // labels: ['January', 'February', 'March', 'April'],
     labels: categoryNames,
     datasets: [{
         backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
         data: props.sums
     }]
 };
+
 const chartOptions = {
     responsive: true
 };
@@ -47,7 +36,6 @@ const options = {
     responsive: true,
     maintainAspectRatio: false
 }
-
 </script>
 
 <template>
@@ -89,7 +77,7 @@ const options = {
                             </div>
                             <div class=" bg-gray-800 h-[1px]"></div>
                             <div class=" px-2 my-1 border-black border-2" v-for="sum in sums">
-                                {{ sum }}
+                                ${{ sum }}
                             </div>
                         </div>
                     </div>

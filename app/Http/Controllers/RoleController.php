@@ -40,8 +40,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make([
+        Validator::make($request->all(), [
             'name' => ['required'],
+            'description' => ['required'],
         ])->validate();
         $new_role = Role::create($request->all());
         return redirect()->route('role.index');
@@ -66,7 +67,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $id = $role['id'];
+        $roleRec = Role::find($id);
+        return Inertia::render('Role/Edit', ['role' => $roleRec]);
     }
 
     /**
@@ -78,7 +81,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Validator::make($request->all(), [
+            'name' => ['required'],
+            'description' => ['required'],
+        ])->validate();
+
+        Role::find($id)->update($request->all());
+        return redirect()->route('role.index');
     }
 
     /**
@@ -89,6 +98,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::find($id)->delete();
+        return redirect()->route('role.index');
     }
 }

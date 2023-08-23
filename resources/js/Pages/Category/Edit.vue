@@ -5,54 +5,36 @@ import { Link, useForm } from '@inertiajs/vue3';
 import VueDatePicker from '../../../../node_modules/@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
-
 const props = defineProps({
- category: {
-  type: Object,
-  default: () => ({}),
- },
+  category: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
-let isOpen = ref(false);
-
-const handleOpen = () => {
- isOpen.value = !isOpen.value;
- console.log(isOpen.value);
-};
-const modal = ref(0)
-
+// Form ref/object
 const form = useForm({
- id: props.category.id,
- name: props.category.name,
- description: props.category.description,
+  id: props.category.id,
+  name: props.category.name,
+  description: props.category.description,
 });
 
 let updatedCategory = ref({
- "id": form.id,
- "name": form.name,
- "description": form.description,
+  "id": form.id,
+  "name": form.name,
+  "description": form.description,
 });
 
-function showModal() {
- let modal = document.getElementById('modal');
- modal.style.display = 'block';
+// Function/s
+const submitSave = (updatedCategory) => {
+  form.put(route('category.update', updatedCategory));
 }
 
-function hideModal() {
- let modal = document.getElementById('modal');
- modal.style.display = 'none';
+const destroy = (id) => {
+  if (confirm("Are you sure you want to delete this record?")) {
+    form.delete(route('category.destroy', id));
+  }
 }
-
-function submitSave(updatedCategory) {
- form.put(route('category.update', updatedCategory));
-}
-
-function destroy(id) {
- if (confirm("Are you sure you want to delete this record?")) {
-  form.delete(route('category.destroy', id));
- }
-}
-
 </script>
 
 <template lang="">
@@ -79,8 +61,10 @@ function destroy(id) {
 
       <div class=" h-[1px] bg-black w-full"></div>
       
+      <!-- FORM -->
       <div class=" w-full mt-2 py-3">
        <form name="createForm" @submit.prevent="submitSave" class=" space-y-3">
+        <!-- name -->
         <div class=" flex-col flex">
           <div class=" items-center justify-between flex">
            <div class=" items-center flex">
@@ -93,6 +77,7 @@ function destroy(id) {
           </div>
         </div>
 
+        <!-- description -->
         <div class=" flex-col flex">
           <div class=" items-center justify-between flex">
             <label for="description">Description</label>
@@ -108,16 +93,19 @@ function destroy(id) {
           </div>
         </div>
 
+        <!-- buttons -->
         <div class=" gap-3 justify-between flex py-3">
          <button @click="destroy(form.id)" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
           Delete
          </button>
+         
          <div class=" gap-3 flex">
            <Link :href="route('category.index')">
             <button id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
              Cancel
             </button>
            </Link>
+
            <button type="submit" @click="submitSave(updatedCategory)" id="ok-btn" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
               Save
            </button>
