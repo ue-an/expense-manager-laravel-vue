@@ -42,19 +42,15 @@ Route::get('/dashboard', function () {
         array_push($sums, $expenses->where('category_id', $categories[$i]->id)->sum('amount'));
     }
 
-    // return Inertia::render('Dashboard/Index', [
-    //     'categories' => $categories,
-    //     'sum' => $exp_sum,
-    // ]);
     return Inertia::render('Dashboard', [
         'categories' => $categories,
         'sums' => $sums,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/user-management', function () {
-//     return Inertia::render('Admin/Index');
-// })->middleware(['auth', 'verified', 'role:admin'])->name('admin.index');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('account', ProfileController::class);
+});
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('role', RoleController::class);

@@ -1,12 +1,12 @@
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
 const isOpen = ref(false);
 
 const toggle = () => {
- 
-  isOpen.value = !isOpen.value;
-  console.log(isOpen.value);
+
+   isOpen.value = !isOpen.value;
+   console.log(isOpen.value);
 }
 
 </script>
@@ -25,12 +25,14 @@ const toggle = () => {
  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
     <ul class="space-y-2 font-medium">
          <li>
-            <div>
-               <div class=" bg-gray-400 rounded-full w-12 h-12"></div>
-               <div class=" mb-10 text-white">
-                  {{$page.props.auth.user.name}}
+            <Link :href="route('profile.edit')">
+               <div>
+                  <div class=" bg-gray-400 rounded-full w-12 h-12"></div>
+                  <div class=" mb-10 text-white">
+                     {{$page.props.auth.user.name}}
+                  </div>
                </div>
-            </div>
+            </Link>
          </li>
          <li>
             <Link :href="route('dashboard')" :active="route().current('dashboard')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

@@ -4,6 +4,7 @@ import AuthLayout from '@/Layouts/AuthLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     categories: Object,
@@ -60,6 +61,7 @@ const options = {
                 <!-- table data display -->
                 <div class=" col-span-1 px-12">
                     <div class=" grid-cols-2 grid">
+                        <Link>
                         <div>
                             <div class=" font-bold text-md">
                                 Expense Categories
@@ -70,6 +72,7 @@ const options = {
                                 {{ category.name }}
                             </div>
                         </div>
+                        </Link>
 
                         <div>
                             <div class=" font-bold text-md">
