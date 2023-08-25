@@ -6,34 +6,34 @@ import VueDatePicker from '../../../../node_modules/@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
 const props = defineProps({
- role: {
-  type: Object,
-  default: () => ({}),
- },
+  role: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 // Form ref/object
 const form = useForm({
- id: props.role.id,
- name: props.role.name,
- description: props.role.description,
+  id: props.role.id,
+  name: props.role.name,
+  description: props.role.description,
 });
 
 let updatedRole = ref({
- "id": form.id,
- "name": form.name,
- "description": form.description,
+  "id": form.id,
+  "name": form.name,
+  "description": form.description,
 });
 
 // Function/s
 const submitSave = (updatedRole) => {
- form.put(route('role.update', updatedRole));
+  form.put(route('role.update', updatedRole));
 }
 
 const destroy = (id) => {
- if (confirm("Are you sure you want to delete this record?")) {
-  form.delete(route('role.destroy', id));
- }
+  if (confirm("Are you sure you want to delete this record?")) {
+    form.delete(route('role.destroy', id));
+  }
 }
 </script>
 
@@ -70,7 +70,8 @@ const destroy = (id) => {
            <div class=" items-center flex">
             <div>Display Name</div>
            </div>
-           <input class=" w-[calc(100%/3)]" id="name" name="name" v-model="form.name" type="text">
+           <input :class="{' hidden' : form.name == 'admin'}" class=" w-[calc(100%/3)]" id="name" name="name" v-model="form.name" type="text">
+           <input disabled :class="{' hidden' :form.name != 'admin' }" class=" border-gray-300 border-spacing-2 text-gray-400 w-[calc(100%/3)]" id="name" name="name" v-model="form.name" type="text">
           </div>
           <div class=" items-center justify-end flex text-red-600" v-if="form.errors.name">
             {{ form.errors.name }}
@@ -86,6 +87,16 @@ const destroy = (id) => {
              v-model="form.description"
              name="description"
              rows="3"
+             :class="{' hidden' : form.name == 'admin'}"
+            ></textarea>
+            <textarea 
+             id="description"
+             v-model="form.description"
+             name="description"
+             rows="3"
+             disabled
+             :class="{'hidden' : form.name != 'admin'}"
+             class=" border-2 border-gray-300 text-gray-400"
             ></textarea>
           </div>
           <div class=" items-center justify-end flex text-red-600" v-if="form.errors.description">
@@ -95,7 +106,8 @@ const destroy = (id) => {
 
         <!-- buttons -->
         <div class=" gap-3 justify-between flex py-3">
-         <button @click="destroy(form.id)" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+          <div :class="{' justify-end flex' : form.name == 'admin'}"></div>
+         <button @click="destroy(form.id)" :class="{'hidden' : form.name == 'admin'}" class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
           Delete
          </button>
          
