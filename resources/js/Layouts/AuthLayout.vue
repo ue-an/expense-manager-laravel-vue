@@ -41,33 +41,33 @@ const toggle = () => {
          </li>
          <!-- <div v-if="($page.props.auth.user.role === 'admin')"> -->
          <div>
-            <li>
+            <li :class="{' hidden' : $page.props.auth.user.role != 'admin'}">
                <span class="flex-1 ml-3 whitespace-nowrap text-white">User Management</span>
             </li>
             <div class=" pl-6">
-            <li>
+            <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
                <Link :href="route('role.index')" :active="route().current('role.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <span class="flex-1 ml-3 whitespace-nowrap">Roles</span>
                </Link>
             </li>
-            <li>
+            <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
                <Link :href="route('user.index')" :active="route().current('user.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
                </Link>
             </li>
             </div>
          </div>
-       <li>
+       <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
           <span class="flex-1 ml-3 whitespace-nowrap text-white">Expense Management</span>
        </li>
-       <div class=" pl-6">
-         <li>
+       <div :class="{' pl-2' : $page.props.auth.user.roles[0].name != 'admin'}" class=" pl-6">
+         <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
             <Link :href="route('category.index')" :active="route().current('category.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Expense Categories</span>
             </Link>
          </li>
          <li>
-            <Link :href="route('expense.index')" :active="route().current('expense.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <Link :href="route('expense.index')" :active="route().current('expense.*')" :class="{' pl-0' : $page.props.auth.user.roles[0].name != 'admin'}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <span class="flex-1 ml-3 whitespace-nowrap">Expenses</span>
             </Link>
          </li>
