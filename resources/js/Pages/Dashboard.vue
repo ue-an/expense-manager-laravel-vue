@@ -24,7 +24,7 @@ for (let i = 0; i < props.categories.length; i++) {
 const chartData = {
     labels: categoryNames,
     datasets: [{
-        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16', '#eded15', '#5fdd16', '#15edd0', '#1581ed', '#1915ed', '#6f15ed', '#bb15ed', '#ed15d0', '#ed157d', '#a5ed15', '#edc515'],
         data: props.sums
     }]
 };
@@ -80,7 +80,7 @@ const options = {
                             </div>
                             <div class=" bg-gray-800 h-[1px]"></div>
                             <div class=" px-2 my-1 border-black border-2" v-for="sum in sums">
-                                ${{ sum }}
+                                ₱{{ sum }}
                             </div>
                         </div>
                     </div>
