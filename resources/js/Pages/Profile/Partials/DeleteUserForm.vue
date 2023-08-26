@@ -30,6 +30,10 @@ const deleteUser = () => {
     });
 };
 
+const showMessage = () => {
+    confirm("Guest account cannot be deleted for demo purposes.");
+}
+
 const closeModal = () => {
     confirmingUserDeletion.value = false;
 
@@ -51,7 +55,7 @@ const closeModal = () => {
         <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
+            <div :class="{ ' hidden': $page.props.auth.user.id === 3 || $page.props.auth.user.id === 1 }" class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
                     Are you sure you want to delete your account?
                 </h2>
@@ -64,15 +68,8 @@ const closeModal = () => {
                 <div class="mt-6">
                     <InputLabel for="password" value="Password" class="sr-only" />
 
-                    <TextInput
-                        id="password"
-                        ref="passwordInput"
-                        v-model="form.password"
-                        type="password"
-                        class="mt-1 block w-3/4"
-                        placeholder="Password"
-                        @keyup.enter="deleteUser"
-                    />
+                    <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
+                        class="mt-1 block w-3/4" placeholder="Password" @keyup.enter="deleteUser" />
 
                     <InputError :message="form.errors.password" class="mt-2" />
                 </div>
@@ -80,14 +77,60 @@ const closeModal = () => {
                 <div class="mt-6 flex justify-end">
                     <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
 
-                    <DangerButton
-                        class="ml-3"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                        @click="deleteUser"
-                    >
-                        Delete Account
-                    </DangerButton>
+                    <div :class="{ ' hidden': $page.props.auth.user.id === 3 }">
+                        <DangerButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                            @click="deleteUser">
+                            Delete Account
+                        </DangerButton>
+                    </div>
+                    <div :class="{ ' hidden': $page.props.auth.user.id != 3 }">
+                        <DangerButton class="ml-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                            @click="showMessage">
+                            Delete Accounts
+                        </DangerButton>
+                    </div>
+                </div>
+            </div>
+
+            <div :class="{ ' hidden': $page.props.auth.user.id != 1 }" class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                    Developer's Message
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    I am you. You are me. You cannot delete this account, you are an admin. Baka.
+                </p>
+                <p class="mt-1 text-sm text-gray-600">
+                    - uean
+                </p>
+
+
+                <div class=" gap-2 mt-6 flex justify-end">
+                    <div class="text-gray-600">
+                        ( ￣０￣)ノ
+                    </div>
+                    <SecondaryButton @click="closeModal">Naruhodo, wakatta</SecondaryButton>
+                </div>
+            </div>
+
+            <div :class="{ ' hidden': $page.props.auth.user.id != 3 }" class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                    Developer's Message
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    Account deletion is disabled in this 'Guest' account for demonstration purposes.
+                </p>
+                <p class="mt-1 text-sm text-gray-600">
+                    - uean
+                </p>
+
+
+                <div class=" gap-2 mt-6 flex justify-end">
+                    <div class="text-gray-600">
+                        ( ￣０￣)ノ
+                    </div>
+                    <SecondaryButton @click="closeModal">Okay</SecondaryButton>
                 </div>
             </div>
         </Modal>

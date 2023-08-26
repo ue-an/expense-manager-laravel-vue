@@ -54,7 +54,7 @@ function convertDate(timeStamp) {
                   <td className="border px-4 py-2">
                     <Link :href="route('expense.edit', expense)">
                       <div>
-                        ${{ expense.amount }}
+                        ₱{{ expense.amount }}
                       </div>
                     </Link>
                   </td>
