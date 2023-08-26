@@ -66,7 +66,8 @@ const options = {
                             <div class=" font-bold text-md">
                                 Expense Categories
                             </div>
-                            <div class=" bg-gray-800 h-[1px]"></div>
+                            <div class=" bg-gray-800 h-[1px]">
+                            </div>
                             <div class=" mr-2 px-2 my-1 border-black border-2" v-for="category in categories"
                                 :key="category.id">
                                 {{ category.name }}

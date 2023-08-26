@@ -45,19 +45,23 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validate([
-            'password' => ['required', 'current-password'],
-        ]);
+        if ($request->user()->id == 1) {
+            return redirect()->route('profile.edit');
+        } else {
+            $request->validate([
+                'password' => ['required', 'current-password'],
+            ]);
 
-        $user = $request->user();
+            $user = $request->user();
 
-        Auth::logout();
+            Auth::logout();
 
-        $user->delete();
+            $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+            return Redirect::to('/');
+        }
     }
 }

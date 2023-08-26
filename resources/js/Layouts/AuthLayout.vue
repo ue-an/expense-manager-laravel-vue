@@ -27,7 +27,11 @@ const toggle = () => {
          <li>
             <Link :href="route('profile.edit')">
                <div>
-                  <div class=" bg-gray-400 rounded-full w-12 h-12"></div>
+                  <div class=" items-center flex bg-gray-300 rounded-full w-16 h-16">
+                     <div class=" m-auto">
+                        {{$page.props.auth.user.name[0]}}
+                     </div>
+                  </div>
                   <div class=" mb-10 text-white">
                      {{$page.props.auth.user.name}}
                   </div>
@@ -37,6 +41,11 @@ const toggle = () => {
          <li>
             <Link :href="route('dashboard')" :active="route().current('dashboard')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <span class="ml-3">Dashboard</span>
+            </Link>
+         </li>
+         <li :class="{' hidden' : $page.props.auth.user.role == 'admin'}">
+            <Link :href="route('expense.index')" :active="route().current('expense.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+               <span class="flex-1 ml-3 whitespace-nowrap">Expenses</span>
             </Link>
          </li>
          <!-- <div v-if="($page.props.auth.user.role === 'admin')"> -->
@@ -57,21 +66,21 @@ const toggle = () => {
             </li>
             </div>
          </div>
-       <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
-          <span class="flex-1 ml-3 whitespace-nowrap text-white">Expense Management</span>
-       </li>
-       <div :class="{' pl-2' : $page.props.auth.user.roles[0].name != 'admin'}" class=" pl-6">
          <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
-            <Link :href="route('category.index')" :active="route().current('category.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <span class="flex-1 ml-3 whitespace-nowrap">Expense Categories</span>
-            </Link>
+            <span class="flex-1 ml-3 whitespace-nowrap text-white">Expense Management</span>
          </li>
-         <li>
-            <Link :href="route('expense.index')" :active="route().current('expense.*')" :class="{' pl-0' : $page.props.auth.user.roles[0].name != 'admin'}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <span class="flex-1 ml-3 whitespace-nowrap">Expenses</span>
-            </Link>
-         </li>
-       </div>
+         <div :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}" class=" pl-6">
+            <li>
+               <Link :href="route('category.index')" :active="route().current('category.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <span class="flex-1 ml-3 whitespace-nowrap">Expense Categories</span>
+               </Link>
+            </li>
+            <li>
+               <Link :href="route('expense.index')" :active="route().current('expense.*')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <span class="flex-1 ml-3 whitespace-nowrap">Expenses</span>
+               </Link>
+            </li>
+         </div>
 
        <!-- <li>
          <Link :href="route('logout')" method="post" as="button" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
