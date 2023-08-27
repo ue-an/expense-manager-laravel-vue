@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Welcome to Uean Expense Manager" />
 
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -33,7 +33,7 @@ defineProps({
             </template>
         </div>
 
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class=" pt-72 max-w-7xl mx-auto p-6 lg:p-8">
             <div class=" items-center justify-center flex-col flex gap-6">
                 <!-- <a href="https://www.flaticon.com/free-icons/philippine-peso" title="philippine peso icons">Philippine peso icons created by Luvdat - Flaticon</a> -->
                 <img width="90px" src="../Components/expmngr.png" alt="">

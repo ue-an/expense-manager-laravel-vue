@@ -17,7 +17,7 @@ function convertDate(timeStamp) {
 
 <template lang="">
  <auth-layout>
-  <div class=" py-6 space-y-12 px-12">
+  <div class=" py-6 space-y-12 md:px-12">
       <div class=" justify-between flex">
         <div>
           Roles
@@ -28,8 +28,8 @@ function convertDate(timeStamp) {
       </div>
 
       <!-- MAIN CONTENT - Roles Table -->
-      <div class=" px-12">
-        <table className=" table-fixed w-full">
+      <div class=" overflow-auto md:px-12">
+        <table className=" table-auto w-full">
         <thead>
               <tr className="bg-gray-100">
                 <th className="px-4 py-2">Display Name</th>
@@ -67,7 +67,7 @@ function convertDate(timeStamp) {
           </tbody>
         </table>
         
-        <div class=" mt-3 justify-end flex">
+        <div class=" w-full mt-3 justify-end flex">
           <Link :href="route('role.create')">
             <button class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4">
               Add Role

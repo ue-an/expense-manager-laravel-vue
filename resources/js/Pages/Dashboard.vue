@@ -47,7 +47,7 @@ const options = {
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
         </template>
 
-        <div class=" py-6 space-y-12 px-12">
+        <div class=" md:py-6 md:space-y-12 md:px-12">
             <div class=" justify-between flex">
                 <div>
                     My Expenses
@@ -57,14 +57,14 @@ const options = {
                 </div>
             </div>
 
-            <div class=" grid-cols-2 grid">
+            <div class=" grid-cols-1 md:grid-cols-2 grid">
                 <!-- table data display -->
-                <div class=" col-span-1 px-12">
+                <div class=" order-last md:order-first col-span-1 px-12">
                     <div class=" grid-cols-2 grid">
                         <Link>
                         <div>
                             <div class=" font-bold text-md">
-                                Expense Categories
+                                Categories
                             </div>
                             <div class=" bg-gray-800 h-[1px]">
                             </div>
