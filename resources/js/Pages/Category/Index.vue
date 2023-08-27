@@ -18,7 +18,7 @@ function convertDate(timeStamp) {
 
 <template lang="">
  <auth-layout>
-  <div class=" py-6 space-y-12 px-12">
+  <div class=" py-6 space-y-12 md:px-12">
       <div class=" justify-between flex">
         <div>
           Expense Categories
@@ -29,8 +29,8 @@ function convertDate(timeStamp) {
       </div>
 
       <!-- MAIN CONTENT - Categories Table -->
-      <div class=" px-12">
-        <table className=" table-fixed w-full">
+      <div class=" overflow-auto md:px-12">
+        <table className=" table-auto w-full">
           <thead>
               <tr className="bg-gray-100">
                   <th className="px-4 py-2">Display Name</th>

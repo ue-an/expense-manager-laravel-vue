@@ -19,7 +19,7 @@ function convertDate(timeStamp) {
 </script>
 <template lang="">
   <auth-layout>
-    <div class=" py-6 space-y-12 px-12">
+    <div class=" py-6 space-y-12 md:px-12">
       <div class=" justify-between flex">
         <div>
           Users
@@ -31,8 +31,8 @@ function convertDate(timeStamp) {
       </div>
 
       <!-- MAIN CONTENT - Users Table -->
-      <div class=" px-12">
-        <table className=" table-fixed w-full">
+      <div class=" overflow-auto md:px-12">
+        <table className=" table-auto w-full">
           <thead>
               <tr className="bg-gray-100">
                   <th className="px-4 py-2">Name</th>
@@ -80,7 +80,7 @@ function convertDate(timeStamp) {
         </table>
 
         <!-- create button -->
-        <div class=" mt-3 justify-end flex">
+        <div class=" w-full mt-3 justify-end flex">
           <Link :href="route('user.create')">
             <button class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4">
               Add User
