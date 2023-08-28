@@ -1,5 +1,8 @@
 # Expense Manager
-### An expense management application with user role permission using Laravel 9 and VueJS 3.
+### An expense management application with user role permission using Laravel 9 and Vue3.
+To use as a guest, here are the default credentials:
+- email: welcome@guest.&#8204;com
+- password: password
 ### Features:
 - User Management
 - User Roles and permissions
