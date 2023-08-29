@@ -45,7 +45,7 @@ Expenses
 ![account](https://github.com/ue-an/expense-manager-laravel-vue/assets/68469141/c1326087-30c0-4dc1-a38e-097d031599c6)
 
 ## Responsive Layout
-![git screenshot mobile](https://github.com/ue-an/expense-manager-vue-laravel/assets/68469141/14eeee16-c1a0-4e37-91ec-7941b306228e)
+![git screenshot mobile](https://github.com/ue-an/expense-manager-portfolio-uean/assets/68469141/fa68499a-246e-4a9d-9a2f-b76d906c5eac)
 
 
 
