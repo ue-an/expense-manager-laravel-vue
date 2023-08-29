@@ -25,7 +25,8 @@ To use as a guest, here are the default credentials:
   
 ## Screenshots:
 ## Dashboard
-![expense-manager-cover](https://github.com/ue-an/expense-manager-vue-laravel/assets/68469141/daa08f2c-d274-4848-b52f-5abb19d2d684)
+![expense-manager-cover](https://github.com/ue-an/expense-manager-portfolio-uean/assets/68469141/f95abcfa-0571-4116-bc50-6a34ac49b96b)
+
 
 ## User Management
 Roles
@@ -35,9 +36,10 @@ Users
 
 ## Expense Management
 Expense Categories
-![categories](https://github.com/ue-an/expense-manager-vue-laravel/assets/68469141/7c7785e3-7ebb-4882-b379-8c4823fddc5b)
+![expense-categories](https://github.com/ue-an/expense-manager-portfolio-uean/assets/68469141/b74d8c01-7b42-4ab5-980a-68cb11da7afe)
+
 Expenses
-![expense-manager-cover2](https://github.com/ue-an/expense-manager-vue-laravel/assets/68469141/6296865e-6101-487e-af10-d512c83f73d2)
+![expense-manager-cover2](https://github.com/ue-an/expense-manager-portfolio-uean/assets/68469141/da176587-c6b8-4681-9d75-8e9a478c22f7)
 
 ## Profile/Account Management
 ![account](https://github.com/ue-an/expense-manager-laravel-vue/assets/68469141/c1326087-30c0-4dc1-a38e-097d031599c6)
