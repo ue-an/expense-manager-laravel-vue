@@ -3,6 +3,10 @@
 To use as a guest, here are the default credentials:
 - email: welcome@guest.&#8204;com
 - password: password
+
+In case you want to have your own user account, don't hesitate to send me a message or email through my website/portfolio:
+
+https://ianaguinaldo.me
 ### Features:
 - User Management
 - User Roles and permissions
