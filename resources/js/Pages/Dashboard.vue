@@ -98,7 +98,7 @@ const submitFilter = () => {
                 <!-- visual daigrams display -->
                 <div>
                     <form @submit.prevent="submitFilter">
-                        <div class=" flex">
+                        <div class=" sm:flex">
                             <div class=" flex-col flex">
                                 <div class=" gap-2 items-center flex">
                                     <label for="email">Start Date</label>
@@ -123,9 +123,9 @@ const submitFilter = () => {
                                 </div>
                             </div>
 
-                            <button :disabled="form.startDate === '' || form.endDate === ''" type="submit" id="ok-btn"
-                                :class="{ ' hover:border-b-2 hover:border-r-2 border-gray-500 text-gray-600': (form.startDate === '' || form.endDate === '') }"
-                                class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+                            <button :disabled="form.startDate == '' || form.endDate == ''" type="submit" id="ok-btn"
+                                :class="{ ' py-1 px-2 text-black border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]': (form.startDate !== '' && form.endDate !== '') }"
+                                class=" py-1 px-2 text-gray-500">
                                 Filter
                             </button>
                         </div>
