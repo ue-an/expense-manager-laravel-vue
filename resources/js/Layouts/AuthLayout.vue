@@ -60,7 +60,7 @@ const closeSidebar = () => {
          </li>
          <!-- <div v-if="($page.props.auth.user.role === 'admin')"> -->
          <div>
-            <li :class="{' hidden' : $page.props.auth.user.role != 'admin'}">
+            <li :class="{' hidden' : $page.props.auth.user.roles[0].name != 'admin'}">
                <span class="flex-1 ml-3 whitespace-nowrap text-white">User Management</span>
             </li>
             <div class=" pl-6">

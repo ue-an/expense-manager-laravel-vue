@@ -8,8 +8,11 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\RoleController;
 use App\Models\Category;
 use App\Models\Expense;
+use Carbon\Carbon;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 /*
@@ -47,6 +50,39 @@ Route::get('/dashboard', function () {
         'sums' => $sums,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/dashboard', function (Request $request) {
+    Validator::make($request->all(), [
+        'startDate' => ['required'],
+        'endDate' => ['required'],
+    ])->validate();
+
+    $user = auth()->user();
+    $categories = Category::latest()->get();
+    $expenses = Expense::query();
+    $allExpenses = Expense::where('user_id', $user->id)->latest()->get();
+    $sums = [];
+
+    if ($request->filled('startDate') && $request->filled('endDate')) {
+        $expenses = Expense::where('user_id', $user->id)->where('entry_date', '>=', Carbon::parse($request->startDate)->toDateTimeString())->where('entry_date', '<=', Carbon::parse($request->endDate)->toDateTimeString())->get();
+        // $expenses = $expenses->where('user_id', $user->id)->where('entry_date', '>=', '2023-07-01 00:00:00')->where('entry_date', '>=', '2023-07-31 00:00:00')->get();
+        for ($i = 0; $i <= count($categories) - 1; $i++) {
+            array_push($sums, $expenses->where('category_id', $categories[$i]->id)->sum('amount'));
+        }
+    } else {
+        $expenses = $expenses->where('user_id', $user->id)->latest()->get();
+        for ($i = 0; $i <= count($categories) - 1; $i++) {
+            array_push($sums, $expenses->where('category_id', $categories[$i]->id)->sum('amount'));
+        }
+    }
+    return Inertia::render('DashboardFilter', [
+        'categories' => $categories,
+        'sums' => $sums,
+        'allExpenses' => $allExpenses,
+        'startDate' => $request->startDate,
+        'endDate' => $request->endDate,
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard.filter');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('account', ProfileController::class);

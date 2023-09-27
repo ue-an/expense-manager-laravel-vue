@@ -1,10 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import AuthLayout from '@/Layouts/AuthLayout.vue';
-import { Head } from '@inertiajs/vue3';
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import VueDatePicker from '../../../node_modules/@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const props = defineProps({
     categories: Object,
@@ -29,14 +30,21 @@ const chartData = {
     }]
 };
 
-const chartOptions = {
-    responsive: true
-};
-
 const options = {
     responsive: true,
     maintainAspectRatio: false
 }
+
+const form = useForm({
+    startDate: '',
+    endDate: '',
+})
+
+const submitFilter = () => {
+    form.post(route('dashboard.filter'));
+}
+
+
 </script>
 
 <template>
@@ -89,6 +97,40 @@ const options = {
 
                 <!-- visual daigrams display -->
                 <div>
+                    <form @submit.prevent="submitFilter">
+                        <div class=" flex">
+                            <div class=" flex-col flex">
+                                <div class=" gap-2 items-center flex">
+                                    <label for="email">Start Date</label>
+                                    <div class="w-[calc(100%-42%)]">
+                                        <VueDatePicker v-model="form.startDate"></VueDatePicker>
+                                    </div>
+                                </div>
+                                <div class=" items-center justify-end flex text-red-600" v-if="form.errors.startDate">
+                                    {{ form.errors.startDate }}
+                                </div>
+                            </div>
+
+                            <div class=" flex-col flex">
+                                <div class=" gap-2 items-center flex">
+                                    <label for="email">End Date</label>
+                                    <div class="w-[calc(100%-42%)]">
+                                        <VueDatePicker v-model="form.endDate"></VueDatePicker>
+                                    </div>
+                                </div>
+                                <div class=" items-center justify-end flex text-red-600" v-if="form.errors.endDate">
+                                    {{ form.errors.endDate }}
+                                </div>
+                            </div>
+
+                            <button :disabled="form.startDate === '' || form.endDate === ''" type="submit" id="ok-btn"
+                                :class="{ ' hover:border-b-2 hover:border-r-2 border-gray-500 text-gray-600': (form.startDate === '' || form.endDate === '') }"
+                                class=" py-1 px-2 border-black border-2 hover:border-b-4 hover:border-r-4 hover:h-[34px]">
+                                Filter
+                            </button>
+                        </div>
+
+                    </form>
                     <div>
                         <Pie id="my-chart-id" :options="options" :data="chartData" />
                     </div>
