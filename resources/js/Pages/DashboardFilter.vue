@@ -118,7 +118,7 @@ const initSums = ref(true);
 
     <!-- visual daigrams display -->
     <div>
-     <div class=" flex">
+     <div class=" sm:flex">
       <div class=" flex-col flex">
        <div class=" gap-2 items-center flex">
         <label for="email">Start Date</label>
